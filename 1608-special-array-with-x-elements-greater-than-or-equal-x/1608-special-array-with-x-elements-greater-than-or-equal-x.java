@@ -1,26 +1,25 @@
 class Solution {
     public int specialArray(int[] nums) {
-    Arrays.sort(nums);
-    for(int i=0;i<=nums.length;i++)
-    {
-        int idx=Arrays.binarySearch(nums,i);
-        if(idx<0) 
-        {
-            idx=-(idx+1);
-        }
-        else 
-        {
-            while (idx>0 && nums[idx-1]>=i) 
+        int x =nums.length;
+        int[] count=new int[x+1]; 
+        for(int elem:nums)
+            if(elem>=x)
             {
-                idx--;
+                count[x]++;
             }
-        }
-        int count=nums.length-idx;
-        if (count==i) 
+            else
+            {
+                count[elem]++; 
+            }  
+        int res=0;
+        for(int i=count.length-1;i>0;i--) 
         {
-            return i;
-        }
-    }
-    return -1;    
+            res+=count[i];
+            if(res==i)
+            {
+                return i;
+            }
+        }    
+        return -1;
     }
 }
