@@ -11,7 +11,7 @@ class Solution {
     }
     sum=sum/2;
     int dp[][]=new int[nums.length+1][sum+1];
-    for (int i=0;i<=nums.length;i++) 
+    for(int i=0;i<=nums.length;i++) 
     {
         Arrays.fill(dp[i],-1); 
     }
@@ -24,17 +24,33 @@ class Solution {
         {
             return true;
         }
-        if (n<=0||sum<0) 
+        if(n<=0) 
         {
             return false;
         }
-        if (dp[n][sum]!=-1) 
+        if(dp[n][sum]!=-1) 
         {
-            return dp[n][sum]==1;
+            if(dp[n][sum]==1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
+        boolean ans;
+        if(nums[n-1]>sum)
+        {
+            ans=subset(nums,n-1,sum,dp);
+        }
+        else
+        {
         boolean pick=subset(nums,n-1,sum-nums[n-1],dp);
         boolean npick=subset(nums,n-1,sum,dp);
-        dp[n][sum] = (pick||npick)?1:0;
-        return dp[n][sum]==1;
+        ans =pick||npick;
+        }
+    dp[n][sum]=ans?1:0;
+    return ans;
     }
 }
