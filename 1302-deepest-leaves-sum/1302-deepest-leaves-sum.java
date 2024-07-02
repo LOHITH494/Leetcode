@@ -3,7 +3,7 @@ class Solution {
     public int deepestLeavesSum(TreeNode root) {
         maxSum=0;
         maxLevel=-1;
-        deepestLeavesSum(root,1);
+        deepestLeavesSum(root,0);
         return maxSum;
     }
 
